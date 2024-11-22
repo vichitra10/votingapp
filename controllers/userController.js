@@ -41,8 +41,12 @@ const signUp = async (req, res) => {
 
         res.status(201).json({ message: 'User successfully registered', user: newUser, token: token });
     } catch (error) {
-        console.error('Error during signup:', error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        
+        res.status(500).json({
+            //message: 'Internal Server Error',
+            error: error.message, // Include the error message in the response
+            stack: error.stack,  // Optional: Include stack trace for debugging (avoid in production)
+        });
     }
 };
 
