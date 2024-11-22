@@ -1,0 +1,37 @@
+## Voting App ##
+
+Functionality of this App
+
+
+1: User SignUp/SignIn
+2: List of All Candidate
+3: Vote only one of this candidate , after voting , user cant vot again
+4:  There is a route which shows the list of candidate and their live vote counts sorted by their vote counts
+5: There should be one admin who  can only maintain the table of candidates and he cant able to vote at All
+6: User data must contain their one unique government  id proof named : Aadhar card number
+7: User can change their Password
+8: User can login only with Aadhar card number and Password
+9: Admin can't vote at all
+
+
+Routes
+
+User Authentication
+/signup: POST - create a new user account
+/login: POST - LogIN to an existing account (aadhar card + password)
+
+Voting:
+/candiates: GET - Get the list of candidates
+/vote/:candidateID : POST - Vote for a specific Candidate
+
+Vote count:
+/vote/counts/: GET - Get the list of candidates sorted by their vote count
+
+User Profile
+/profile: GET - Get the user profile information
+/profile/password : PUT -  Change the user's Password
+
+Admin Candidate Management
+/candidate: POST - Create a new Candidate
+/candidate/:candidateId : PUT - Update an existing candidate
+/candiddate/:candidateId : DELETE: Delete a candidate form the list
