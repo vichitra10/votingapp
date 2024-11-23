@@ -4,11 +4,20 @@ const app = express();
 const userRoute = require('./routes/userRoute');
 const candidateRoute = require('./routes/candidateRoute');
 const votingRoute = require('./routes/votingRoute');
+const commonRoute = require('./routes/commonRoute');
 const User = require('./models/User');
 const Candidate = require('./models/Candidate');
 const authenticateJWT = require('./middleware/auth');
 
+
 require('dotenv').config();
+
+const  { GoogleGenerativeAI } = require("@google/generative-ai");
+const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+
+console.log(genAI);
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
@@ -33,6 +42,9 @@ mongoose.connect(process.env.MONGO_URI, {
 app.use('/api/user', userRoute);
 app.use('/api/candidate', authenticateJWT, candidateRoute );
 app.use('/api/vote', votingRoute);
+app.use('/api', commonRoute)
+
+
 
 app.listen(PORT, () => {
     console.log(`Listening on Port ${PORT}`);
